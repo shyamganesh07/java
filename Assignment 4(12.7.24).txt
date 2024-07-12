@@ -1,0 +1,193 @@
+Qn 31) Lcm and Gcd
+import java.io.*;
+import java.util.*;
+
+public class FindLCMandGCD {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = s.nextInt();
+        }
+
+        int g = a[0];
+        for (int i = 1; i < n; i++) {
+            g = BigInteger.valueOf(g).gcd(BigInteger.valueOf(a[i])).intValue();
+        }
+
+        int l = a[0];
+        for (int i = 1; i < n; i++) {
+            l = l * (a[i] / BigInteger.valueOf(l).gcd(BigInteger.valueOf(a[i])).intValue());
+        }
+
+        System.out.println("GCD = " + g);
+        System.out.println("LCM = " + l);
+    }
+}
+
+Qn 32) Simple interest
+import java.io.*;
+import java.util.*;
+
+public class SimpleInterestCalculation {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        System.out.print("Enter the principal amount: ");
+        double p = s.nextDouble();
+        System.out.print("Enter the number of years: ");
+        double y = s.nextDouble();
+        System.out.print("Is customer senior citizen (y/n): ");
+        char c = s.next().charAt(0);
+        double r = (c == 'y' || c == 'Y') ? 0.12 : 0.10;
+        double i = (p * r * y);
+        System.out.println("Interest: " + i);
+    }
+}
+
+Qn 33) Fibonacci series
+import java.io.*;
+import java.util.*;
+
+public class FibonacciSeries {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        System.out.print("Enter the n value: ");
+        int n = s.nextInt();
+        int a = 0, b = 1;
+        for (int i = 0; i < n; i++) {
+            System.out.print(a + (i < n - 1 ? "\t" : ""));
+            int t = a + b;
+            a = b;
+            b = t;
+        }
+    }
+}
+
+Qn 34) Even sum of Fibonacci series till N
+import java.io.*;
+import java.util.*;
+
+public class EvenSumFibonacci {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        int a = 0, b = 1, sum = 0;
+        for (int i = 0; i <= 2 * n; i++) {
+            if (i % 2 == 0) sum += a;
+            int t = a + b;
+            a = b;
+            b = t;
+        }
+        System.out.println(sum);
+    }
+}
+
+Qn 35) Print Numbers from M to n by skipping K numbers
+import java.io.*;
+import java.util.*;
+
+public class PrintNumbersSkipping {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int m = s.nextInt();
+        int n = s.nextInt();
+        int k = s.nextInt();
+        for (int i = m; i <= n; i += k + 1) {
+            System.out.print(i + (i + k + 1 <= n ? ", " : ""));
+        }
+    }
+}
+
+Qn 36) Composite numbers between A and B
+import java.io.*;
+import java.util.*;
+
+public class CompositeNumbers {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int a = s.nextInt();
+        int b = s.nextInt();
+        if (a > b) {
+            int t = a;
+            a = b;
+            b = t;
+        }
+        for (int i = a; i <= b; i++) {
+            if (i > 1 && !isPrime(i)) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+
+    public static boolean isPrime(int n) {
+        if (n < 2) return false;
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+}
+
+Qn 37) Factorial of N
+import java.io.*;
+import java.util.*;
+
+public class Factorial {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        long f = 1;
+        for (int i = 2; i <= n; i++) {
+            f *= i;
+        }
+        System.out.println(n + " Factorial = " + f);
+    }
+}
+
+Qn 38) Leap Year check
+import java.io.*;
+import java.util.*;
+
+public class LeapYearCheck {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        String d = s.next();
+        String[] p = d.split("/");
+        int y = Integer.parseInt(p[2]);
+        boolean l = (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0);
+        System.out.println("Given year is " + (l ? "Leap Year" : "Non Leap Year"));
+    }
+}
+
+Qn 39) Number of factors
+import java.io.*;
+import java.util.*;
+
+public class NumberOfFactors {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        int c = 0;
+        for (int i = 1; i <= n; i++) {
+            if (n % i == 0) c++;
+        }
+        System.out.println("Number of factors = " + c);
+    }
+}
+
+Qn 40) Perfect Number
+import java.io.*;
+import java.util.*;
+
+public class PerfectNumberCheck {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        int sum = 0;
+        for (int i = 1; i < n; i++) {
+            if (n % i == 0) sum += i;
+        }
+        System.out.println("It’s a " + (sum == n ? "Perfect" : "Not Perfect") + " Number");
+    }
+}
