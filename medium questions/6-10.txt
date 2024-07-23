@@ -1,0 +1,136 @@
+6.find bonus and total salary
+
+import java.util.Scanner;
+class v {
+    public static void main(String[] args) {
+        Scanner obj=new Scanner(System.in);
+        int s=obj.nextInt();
+        double b=0;
+        System.out.println("enter grade:");
+        String g="a";
+        if(g=="A"|| g=="a"){
+            b=s*0.05;
+        }
+        else if(g=="B"||g=="b"){
+            b=s*0.10;
+        }
+        if(s<10000){
+            b+=s*0.02;
+        }
+        System.out.println("salary:"+s);
+        System.out.println("bonus:"+b);
+        double t=s+b;
+        System.out.println("total amount:"+t);
+    }
+}
+
+7.find first k perfect numbers
+
+public class V {
+    public static void main(String[] args) {
+        int n = 2, c = 0, k = 3; 
+        System.out.print("First " + k + " perfect numbers are: ");
+        while (c < k) {
+            int sum = 0;
+            for (int i = 1; i <= n / 2; i++) {
+                if (n % i == 0) {
+                    sum += i;
+                }
+            }
+            if (sum == n) {
+                System.out.print(n + " ");
+                c++;
+            }
+            n++;
+        }
+    }
+}
+
+
+8.grade 
+
+import java.util.Scanner;
+public class v{
+    public static void main(String[] args){
+        Scanner obj=new Scanner(System.in);
+        int a=obj.nextInt();
+        int b=obj.nextInt();
+        int c=obj.nextInt();
+        int d=obj.nextInt();
+        int t=a+b+c+d;
+        double m=t/4;
+        if(m>75.0){
+            System.out.println("DISTINCTION");
+        }
+        else if(m>=60.0 &&m<75.0){
+            System.out.println("FIRST DIVISION");
+        }
+       else if(m>=50.0 &&m<60.0){
+            System.out.println("SECOND DIVISION");
+        }
+        else if(m>=40.0 &&m<50.0){
+            System.out.println("THIRD DIVISION");
+        }
+        else{
+            System.out.println("FAIL");
+        }
+    }
+}
+
+9.print avg of neg and pos numbers where num !=-1
+
+import java.util.Scanner;
+public class v{
+    public static void main(String[] args){
+        int m=0,p=0,n=0,c=0;
+        Scanner obj=new Scanner(System.in);
+        while(m!=-1){
+            int a=obj.nextInt();
+            m=a;
+            c++;
+            if(a>=0){
+                p+=a;
+            }
+            else{
+                n+=a;
+            }
+        }
+        double x=p/c;
+        double y=n/c;
+        System.out.println("average of positive numbers is:"+x);
+        System.out.println("average of negative numbers is:"+y);
+    }
+}
+
+10.count lower,upper,numbers 
+
+import java.util.Scanner;
+public class v{
+    public static void main(String[] args){
+        Scanner obj=new Scanner(System.in);
+        char s='$';
+        int u=0,l=0,n=0,m=0;
+        while(s!='*'){
+            s = obj.next().charAt(0);
+            int x=(int) s;
+            if(x>=97 && x<=122){
+                l++;
+            }
+            else if(x>=65 && x<97){
+                u++;
+            }
+            else if(x>=48 && x<=57){
+                n++;
+            }
+            if(s=='-'){
+                char y=obj.next().charAt(0);
+                if(y>=48 && y<=57){
+                    m+=2;
+                }
+            }
+        }
+        System.out.println("lower case count:"+l);
+        System.out.println("Upper case count:"+u);
+        System.out.println("Numbers count:"+(n+m));
+    }
+}
