@@ -1,0 +1,183 @@
+----TO COUNT PRIME NUMBERS AND COMPOSITE NUMBER----
+
+import java.util.Scanner;
+
+public class PrimeCompositeCounter {
+
+    public static boolean isPrime(int n) {
+        if (n <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the numbers (enter a non-integer to stop):");
+
+        int primeCount = 0;
+        int compositeCount = 0;
+
+        while (scanner.hasNextInt()) {
+            int num = scanner.nextInt();
+            if (num > 1) {
+                if (isPrime(num)) {
+                    primeCount += 1;
+                } else {
+                    compositeCount += 1;
+                }
+            }
+        }
+
+        System.out.println("Composite numbers: " + compositeCount);
+        System.out.println("Prime numbers: " + primeCount);
+
+        scanner.close();
+    }
+}
+
+----FIND THE MTH MAXIMUM AND NTH MINIMUM----
+import java.util.Arrays;
+
+public class MinMaxFinder {
+
+    public static void findMinMax(int[] arr, int M, int N) {
+        Arrays.sort(arr);
+        
+        int MthMax = arr[arr.length - M];
+        int NthMin = arr[N - 1];
+        
+        int sum = MthMax + NthMin;
+        int difference = MthMax - NthMin;
+        
+        System.out.println(M + "th Maximum Number = " + MthMax);
+        System.out.println(N + "th Minimum Number = " + NthMin);
+        System.out.println("Sum = " + sum);
+        System.out.println("Difference = " + difference);
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {14, 16, 87, 36, 25, 89, 34};
+        int M = 1;
+        int N = 3;
+        
+        findMinMax(arr, M, N);
+    }
+}
+
+----TO COUNT TOTAL AMOUNT IN ATM----
+import java.util.Scanner;
+
+public class ATMBalanceCalculator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int totalBalance = 0;
+
+        System.out.print("Enter the 1st Denomination: ");
+        int denom1 = scanner.nextInt();
+        System.out.print("Enter the 1st Denomination number of notes: ");
+        int notes1 = scanner.nextInt();
+        totalBalance += denom1 * notes1;
+
+        System.out.print("Enter the 2nd Denomination: ");
+        int denom2 = scanner.nextInt();
+        System.out.print("Enter the 2nd Denomination number of notes: ");
+        int notes2 = scanner.nextInt();
+        totalBalance += denom2 * notes2;
+
+        System.out.print("Enter the 3rd Denomination: ");
+        int denom3 = scanner.nextInt();
+        System.out.print("Enter the 3rd Denomination number of notes: ");
+        int notes3 = scanner.nextInt();
+        totalBalance += denom3 * notes3;
+
+        System.out.print("Enter the 4th Denomination: ");
+        int denom4 = scanner.nextInt();
+        System.out.print("Enter the 4th Denomination number of notes: ");
+        int notes4 = scanner.nextInt();
+        totalBalance += denom4 * notes4;
+
+        System.out.println("Total Available Balance in ATM: " + totalBalance);
+
+        scanner.close();
+    }
+}
+
+----TO CHECK PALINDROME----
+import java.util.Scanner;
+
+public class PalindromeChecker {
+
+    public static boolean isPalindrome(String s) {
+        int len = s.length();
+        for (int i = 0; i < len / 2; i++) {
+            if (s.charAt(i) != s.charAt(len - i - 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isPalindrome(int n) {
+        String s = Integer.toString(n);
+        return isPalindrome(s);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Case = ");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        if (choice == 1) {
+            System.out.print("String = ");
+            String s = scanner.nextLine();
+            if (isPalindrome(s)) {
+                System.out.println("Palindrome");
+            } else {
+                System.out.println("Not Palindrome");
+            }
+        } else if (choice == 2) {
+            System.out.print("Number = ");
+            int n = scanner.nextInt();
+            if (isPalindrome(n)) {
+                System.out.println("Palindrome");
+            } else {
+                System.out.println("Not Palindrome");
+            }
+        } else {
+            System.out.println("Invalid choice");
+        }
+
+        scanner.close();
+    }
+}
+
+----DECIMAL TO BINARY AND OCTAL----
+import java.util.Scanner;
+
+public class DecimalConverter {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Decimal Number: ");
+        int decimalNumber = scanner.nextInt();
+
+        String binaryNumber = Integer.toBinaryString(decimalNumber);
+        String octalNumber = Integer.toOctalString(decimalNumber);
+
+        System.out.println("Binary Number = " + binaryNumber);
+        System.out.println("Octal = " + octalNumber);
+
+        scanner.close();
+    }
+}
