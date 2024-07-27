@@ -1,0 +1,52 @@
+Problem 1: ComputeMethods.java and TestClass.java
+
+1.ComputeMethods.java
+
+public class ComputeMethods {
+    public double fToC(double degreesF) {
+        return 5.0 / 9.0 * (degreesF - 32);
+    }
+    public double hypotenuse(int a, int b) {
+        return Math.sqrt(a * a + b * b);
+    }
+    public int roll() {
+        int die1 = (int) (Math.random() * 6) + 1;
+        int die2 = (int) (Math.random() * 6) + 1;
+        return die1 + die2;
+    }
+}
+
+2.TestClass.java
+
+public class TestClass {
+    public static void main(String[] args) {
+        ComputeMethods cm = new ComputeMethods();
+        double tempF = 100.0;
+        double tempC = cm.fToC(tempF);
+        System.out.println("Temp in celsius is " + tempC);
+        int sideA = 6;
+        int sideB = 8;
+        double hypotenuse = cm.hypotenuse(sideA, sideB);
+        System.out.println("Hypotenuse is " + hypotenuse);
+        int sum = cm.roll();
+        System.out.println("The sum of the dice values is " + sum);
+    }
+}
+
+Problem 2: Process a Name
+
+1.ProcessName.java
+
+import java.util.Scanner;
+
+public class ProcessName {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Type your name: ");
+        String fullName = scanner.nextLine();
+        String[] nameParts = fullName.split(" ");
+        String firstName = nameParts[0];
+        String lastName = nameParts[1];
+        System.out.println("Your name is: " + lastName + ", " + firstName.charAt(0) + ".");
+    }
+}
