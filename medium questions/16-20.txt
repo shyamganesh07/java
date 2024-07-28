@@ -1,0 +1,175 @@
+16. Bank Interest Rates
+
+class Bank {
+    double getRateOfInterest() {
+        return 0;
+    }
+}
+
+class SBI extends Bank {
+    double getRateOfInterest() {
+        return 8.4;
+    }
+}
+
+class ICICI extends Bank {
+    double getRateOfInterest() {
+        return 7.3;
+    }
+}
+
+class AXIS extends Bank {
+    double getRateOfInterest() {
+        return 9.7;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Bank sbi = new SBI();
+        Bank icici = new ICICI();
+        Bank axis = new AXIS();
+        
+        System.out.println("SBI Rate of Interest: " + sbi.getRateOfInterest());
+        System.out.println("ICICI Rate of Interest: " + icici.getRateOfInterest());
+        System.out.println("AXIS Rate of Interest: " + axis.getRateOfInterest());
+    }
+}
+
+17.Subclass Hiding Superclass Members
+
+class SuperClass {
+    int value;
+
+    SuperClass(int value) {
+        this.value = value;
+    }
+
+    void display() {
+        System.out.println("SuperClass value: " + value);
+    }
+}
+
+class SubClass extends SuperClass {
+    int value;
+
+    SubClass(int superValue, int subValue) {
+        super(superValue);
+        this.value = subValue;
+    }
+
+    void display() {
+        super.display();
+        System.out.println("SubClass value: " + value);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        SubClass obj = new SubClass(100, 200);
+        obj.display();
+    }
+}
+
+18. Multiplication Table using Threads
+
+class MultiplicationTable implements Runnable {
+    int number;
+
+    MultiplicationTable(int number) {
+        this.number = number;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(number + " X " + i + " = " + (number * i));
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Thread thread1 = new Thread(new MultiplicationTable(5));
+        Thread thread2 = new Thread(new MultiplicationTable(10));
+
+        thread1.start();
+        thread2.start();
+    }
+}
+
+19.Fibonacci Series using Runnable
+
+class Fibonacci implements Runnable {
+    int count;
+
+    Fibonacci(int count) {
+        this.count = count;
+    }
+
+    @Override
+    public void run() {
+        if (count <= 0) {
+            System.out.println("Invalid input. The count must be a positive integer.");
+            return;
+        }
+        
+        int n1 = 0, n2 = 1, n3;
+        System.out.print(n1 + " " + n2);
+
+        for (int i = 2; i < count; ++i) {
+            n3 = n1 + n2;
+            System.out.print(" " + n3);
+            n1 = n2;
+            n2 = n3;
+        }
+        System.out.println();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Thread thread1 = new Thread(new Fibonacci(5));
+        thread1.start();
+        Thread thread2 = new Thread(new Fibonacci(7));
+        thread2.start();
+        Thread thread3 = new Thread(new Fibonacci(-10));
+        thread3.start();
+
+        Thread thread4 = new Thread(new Fibonacci(0));
+        thread4.start();
+    }
+}
+
+20. Sum of N Numbers with ArrayIndexOutOfBoundsException
+
+public class Main {
+    public static void main(String[] args) {
+        // Sample input
+        int[] numbers = {1, 2, 3, 4, 5};
+        int N = 5;
+        int sum = 0;
+
+        try {
+            for (int i = 0; i <= N; i++) {  
+                sum += numbers[i];
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Array index out of bounds!");
+        }
+
+        System.out.println("Sum: " + sum);
+        int[] numbers1 = {4, 10};
+        int N1 = 2;
+        int sum1 = 0;
+        try {
+            for (int i = 0; i <= N1; i++) {
+                sum1 += numbers1[i];
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Array index out of bounds!");
+        }
+        System.out.println("Sum: " + sum1);
+
+            }
+}
