@@ -1,0 +1,196 @@
+project 6:
+
+public class Card {
+    private int cardNumber;
+    private int creditBalance;
+    private int ticketBalance;
+
+    public Card(int cardNumber) {
+        this.cardNumber = cardNumber;
+        this.creditBalance = 0;
+        this.ticketBalance = 0;
+    }
+
+    public int getCardNumber() {
+        return cardNumber;
+    }
+
+    public int getCreditBalance() {
+        return creditBalance;
+    }
+
+    public int getTicketBalance() {
+        return ticketBalance;
+    }
+
+    public void addCredits(int credits) {
+        creditBalance += credits;
+    }
+
+    public boolean subtractCredits(int credits) {
+        if (creditBalance >= credits) {
+            creditBalance -= credits;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void addTickets(int tickets) {
+        ticketBalance += tickets;
+    }
+
+    public boolean subtractTickets(int tickets) {
+        if (ticketBalance >= tickets) {
+            ticketBalance -= tickets;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void transferCredits(Card otherCard, int credits) {
+        if (subtractCredits(credits)) {
+            otherCard.addCredits(credits);
+        }
+    }
+
+    public void transferTickets(Card otherCard, int tickets) {
+        if (subtractTickets(tickets)) {
+            otherCard.addTickets(tickets);
+        }
+    }
+}
+
+import java.util.Random;
+
+public class Game {
+    private int creditsRequired;
+    private Random random;
+
+    public Game(int creditsRequired) {
+        this.creditsRequired = creditsRequired;
+        this.random = new Random();
+    }
+
+    public void playGame(Card card) {
+        if (card.subtractCredits(creditsRequired)) {
+            int ticketsWon = random.nextInt(10);  // Random tickets between 0 and 9
+            card.addTickets(ticketsWon);
+            System.out.println("Card " + card.getCardNumber() + " won " + ticketsWon + " tickets. New ticket balance: " + card.getTicketBalance());
+        } else {
+            System.out.println("Card " + card.getCardNumber() + " has insufficient credits to play the game.");
+        }
+    }
+}
+
+
+public class Prize {
+    private String name;
+    private int ticketsRequired;
+    private int count;
+
+    public Prize(String name, int ticketsRequired, int count) {
+        this.name = name;
+        this.ticketsRequired = ticketsRequired;
+        this.count = count;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getTicketsRequired() {
+        return ticketsRequired;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void decrementCount() {
+        if (count > 0) {
+            count--;
+        }
+    }
+}
+
+public class Terminal {
+    private Prize[] prizes;
+
+    public Terminal(Prize[] prizes) {
+        this.prizes = prizes;
+    }
+
+    public void loadCredits(Card card, int money) {
+        int credits = money * 2;
+        card.addCredits(credits);
+        System.out.println("Card " + card.getCardNumber() + " loaded with " + credits + " credits. New credit balance: " + card.getCreditBalance());
+    }
+
+    public void checkBalances(Card card) {
+        System.out.println("Card " + card.getCardNumber() + " has " + card.getCreditBalance() + " credits and " + card.getTicketBalance() + " tickets.");
+    }
+
+    public void transferCredits(Card fromCard, Card toCard, int credits) {
+        fromCard.transferCredits(toCard, credits);
+        System.out.println("Transferred " + credits + " credits from Card " + fromCard.getCardNumber() + " to Card " + toCard.getCardNumber());
+        checkBalances(fromCard);
+        checkBalances(toCard);
+    }
+
+    public void transferTickets(Card fromCard, Card toCard, int tickets) {
+        fromCard.transferTickets(toCard, tickets);
+        System.out.println("Transferred " + tickets + " tickets from Card " + fromCard.getCardNumber() + " to Card " + toCard.getCardNumber());
+        checkBalances(fromCard);
+        checkBalances(toCard);
+    }
+
+    public void exchangeTicketsForPrize(Card card, String prizeName) {
+        for (Prize prize : prizes) {
+            if (prize.getName().equals(prizeName)) {
+                if (prize.getCount() > 0 && card.subtractTickets(prize.getTicketsRequired())) {
+                    prize.decrementCount();
+                    System.out.println("Card " + card.getCardNumber() + " redeemed " + prizeName + ". Remaining: " + prize.getCount());
+                } else {
+                    System.out.println("Card " + card.getCardNumber() + " cannot redeem " + prizeName + ". Insufficient tickets or prize out of stock.");
+                }
+                return;
+            }
+        }
+        System.out.println("Prize " + prizeName + " not found.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Card card1 = new Card(1);
+        Card card2 = new Card(2);
+
+        Prize[] prizes = {
+            new Prize("Stuffed Animal", 10, 5),
+            new Prize("Toy Car", 5, 10),
+            new Prize("Keychain", 2, 20)
+        };
+
+        Terminal terminal = new Terminal(prizes);
+        Game game = new Game(3);
+
+        terminal.loadCredits(card1, 10);  // $10 -> 20 credits
+        terminal.loadCredits(card2, 5);   // $5 -> 10 credits
+
+        game.playGame(card1);
+        game.playGame(card1);
+        game.playGame(card2);
+
+        terminal.transferCredits(card1, card2, 5);
+        terminal.transferTickets(card1, card2, 5);
+
+        terminal.exchangeTicketsForPrize(card2, "Stuffed Animal");
+        terminal.exchangeTicketsForPrize(card1, "Toy Car");
+
+        terminal.checkBalances(card1);
+        terminal.checkBalances(card2);
+    }
+}
+
