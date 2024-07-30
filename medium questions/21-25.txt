@@ -1,0 +1,135 @@
+21. Prime Number Check Using Threads
+
+public class PrimeChecker implements Runnable {
+    private int number;
+
+    public PrimeChecker(int number) {
+        this.number = number;
+    }
+
+    @Override
+    public void run() {
+        if (isPrime(number)) {
+            System.out.println(number + " is Prime");
+        } else {
+            System.out.println(number + " is not Prime");
+        }
+    }
+
+    private boolean isPrime(int num) {
+        if (num <= 1) return false;
+        if (num == 2) return true;
+        if (num % 2 == 0) return false;
+        for (int i = 3; i * i <= num; i += 2) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        // Test Cases
+        int[] testNumbers = {5, 4, -10, 0, 11};
+        for (int num : testNumbers) {
+            Thread thread = new Thread(new PrimeChecker(num));
+            thread.start();
+        }
+    }
+}
+
+22. Multi-Catch Exception Handling
+
+public class MultiCatchExample {
+    public static void main(String[] args) {
+        try {
+            int[] numbers = new int[5];
+            int result = 10 / 0; // ArithmeticException
+            numbers[10] = 5; // ArrayIndexOutOfBoundsException
+            String str = null;
+            int length = str.length(); // NullPointerException
+        } catch (ArithmeticException | ArrayIndexOutOfBoundsException | NullPointerException e) {
+            System.out.println("Exception caught: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+        }
+    }
+}
+
+23. File Writing and Reading
+
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class FileReadWriteExample {
+    public static void main(String[] args) {
+        String fileName = "example.txt";
+        String content = "Computer Science and Engineering";
+
+        // Write to file
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.write(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Read from file
+        try (FileReader reader = new FileReader(fileName)) {
+            int character;
+            while ((character = reader.read()) != -1) {
+                System.out.print((char) character);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+24. Volume of Box Using Default Constructor
+
+public class Box {
+    private double length;
+    private double width;
+    private double height;
+
+    // Default constructor
+    public Box() {
+        this.length = 1.0;
+        this.width = 1.0;
+        this.height = 1.0;
+    }
+
+    public double getVolume() {
+        return length * width * height;
+    }
+
+    public static void main(String[] args) {
+        Box box = new Box();
+        System.out.println("Volume of the box: " + box.getVolume());
+    }
+}
+
+25. String Operations
+
+
+import java.util.Scanner;
+
+public class StringOperations {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a string: ");
+        String input = scanner.nextLine();
+
+        // Replace a word
+        String replacedString = input.replace("Saveetha", "XYZ");
+
+        // Find length
+        int length = input.length();
+
+        // Uppercase Conversion
+        String upperCaseString = input.toUpperCase();
+
+        System.out.println("Replaced String: " + replacedString);
+        System.out.println("Length of String: " + length);
+        System.out.println("Uppercase String: " + upperCaseString);
+
+        scanner.close();
+    }
+}
